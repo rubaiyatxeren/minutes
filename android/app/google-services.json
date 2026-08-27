@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "385449337240",
+    "project_id": "bondhon---social-media-app",
+    "storage_bucket": "bondhon---social-media-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385449337240:android:1cf9a5bad5110628170bed",
+        "android_client_info": {
+          "package_name": "com.example.minutes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385449337240-tdtka6scsnng82q74vlhjtpd1hne988p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeaQzSjqZhPxio10S-lmqBbkioFTIKDqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385449337240-rgm78dupv0br5cgjocpff4jknh2htbof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385449337240:android:9ba4e5cc9872ea79170bed",
+        "android_client_info": {
+          "package_name": "com.ygstudio.petty_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385449337240-tdtka6scsnng82q74vlhjtpd1hne988p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeaQzSjqZhPxio10S-lmqBbkioFTIKDqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385449337240-rgm78dupv0br5cgjocpff4jknh2htbof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385449337240:android:88f4eb3d99dcdda5170bed",
+        "android_client_info": {
+          "package_name": "com.ygstudio.petty_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385449337240-tdtka6scsnng82q74vlhjtpd1hne988p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeaQzSjqZhPxio10S-lmqBbkioFTIKDqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385449337240-rgm78dupv0br5cgjocpff4jknh2htbof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,80 @@
+name: minutes
+description: "A modern video conferencing & team chat app (Teams/Zoom-style) built with Flutter, Firebase, and Jitsi Meet."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # State management
+  provider: ^6.1.2
+
+  # Firebase (auth + realtime chat DB + storage) — free tier, fastest to set up
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.4
+  cloudinary: ^1.2.2
+
+  # Social login
+  google_sign_in: ^6.2.1
+
+  # Video/audio conferencing — free, open source
+  jitsi_meet_flutter_sdk: ^13.1.1
+
+  # UI / UX
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
+  smooth_page_indicator: ^1.2.0
+  flutter_slidable: ^3.1.1
+  emoji_picker_flutter: ^3.1.0
+  giphy_get: ^3.5.0
+
+  # Media handling
+  image_picker: ^1.1.2
+  file_picker: ^8.1.2
+  video_player: ^2.9.2
+  photo_view: ^0.15.0
+  path_provider:
+  open_file:
+  dio:
+
+  # Utilities
+  shared_preferences: ^2.3.2
+  intl: ^0.20.2
+  uuid: ^4.5.1
+  permission_handler: ^11.3.1
+  connectivity_plus: ^6.0.5
+  flutter_local_notifications: ^18.0.1
+  timeago: ^3.7.0
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icon/
+
+# -----------------------------------
+# App Icon Configuration
+# -----------------------------------
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  remove_alpha_ios: true
