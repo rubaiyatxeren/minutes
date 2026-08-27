@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- Camera & Microphone Permissions -->
+    <key>NSCameraUsageDescription</key>
+    <string>Minutes needs camera access for video calls and profile photos.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Minutes needs microphone access for audio and video calls.</string>
+
+    <!-- Photo Library Permissions -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Minutes needs photo library access to share images and videos in chat.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Minutes needs permission to save media you download from chats.</string>
+
+    <!-- Network Access -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Minutes uses the local network to improve call quality.</string>
+
+    <!-- Google Sign-In URL Scheme (Populated from GoogleService-Info.plist) -->
+    <!-- Google Sign-In URL Scheme -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.385449337240-5kns29rctfj5tcr46hl7u8ebukl35klj</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+
+</dict>
+</plist>
