@@ -1,5 +1,5 @@
 workflows:
-  ios-release:
+  ios-build:
     name: iOS Release Build
     instance_type: mac_mini_m1
     integrations:
@@ -22,6 +22,6 @@ workflows:
           cd ios && pod install
       - name: Build iOS IPA
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
