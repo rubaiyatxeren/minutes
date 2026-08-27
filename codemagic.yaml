@@ -20,10 +20,79 @@ workflows:
       - name: Install CocoaPods
         script: |
           cd ios && pod install
+      - name: Add app-level privacy manifest
+        script: |
+          cat > ios/Runner/PrivacyInfo.xcprivacy << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>NSPrivacyTracking</key>
+              <false/>
+              <key>NSPrivacyTrackingDomains</key>
+              <array/>
+              <key>NSPrivacyCollectedDataTypes</key>
+              <array/>
+              <key>NSPrivacyAccessedAPITypes</key>
+              <array>
+                  <dict>
+                      <key>NSPrivacyAccessedAPIType</key>
+                      <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+                      <key>NSPrivacyAccessedAPITypeReasons</key>
+                      <array>
+                          <string>CA92.1</string>
+                      </array>
+                  </dict>
+                  <dict>
+                      <key>NSPrivacyAccessedAPIType</key>
+                      <string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+                      <key>NSPrivacyAccessedAPITypeReasons</key>
+                      <array>
+                          <string>C617.1</string>
+                      </array>
+                  </dict>
+                  <dict>
+                      <key>NSPrivacyAccessedAPIType</key>
+                      <string>NSPrivacyAccessedAPICategoryDiskSpace</string>
+                      <key>NSPrivacyAccessedAPITypeReasons</key>
+                      <array>
+                          <string>E174.1</string>
+                      </array>
+                  </dict>
+                  <dict>
+                      <key>NSPrivacyAccessedAPIType</key>
+                      <string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+                      <key>NSPrivacyAccessedAPITypeReasons</key>
+                      <array>
+                          <string>35F9.1</string>
+                      </array>
+                  </dict>
+              </array>
+          </dict>
+          </plist>
+          EOF
+      - name: Check for pods missing privacy manifests
+        script: |
+          cd ios
+          for dir in Pods/*/; do
+            pod=$(basename "$dir")
+            if [ ! -f "$dir/PrivacyInfo.xcprivacy" ] && find "$dir" -name "*.bundle" | grep -qi privacy 2>/dev/null; then
+              continue
+            fi
+            if [ ! -f "$dir/PrivacyInfo.xcprivacy" ]; then
+              echo "⚠️  Missing manifest: $pod"
+            fi
+          done
       - name: Clear corrupted SPM cache
         script: |
           rm -rf ~/Library/Caches/org.swift.swiftpm
           rm -rf ios/SourcePackages
+      - name: Bump build number
+        script: |
+          #!/bin/bash
+          set -e
+          cd $CM_BUILD_DIR
+          agvtool new-version -all $(($(app-store-connect get-latest-testflight-build-number "$BUNDLE_ID" --live) + 1)) || true
       - name: Build iOS IPA
         script: |
           flutter build ipa --release --export-options-plist /Users/builder/export_options.plist
