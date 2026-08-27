@@ -3,7 +3,7 @@ workflows:
     name: iOS Release Build
     instance_type: mac_mini_m1
     integrations:
-      app_store_connect: "App Store Connect Key"
+      app_store_connect: "Codemagic Key"
     environment:
       ios_signing:
         distribution_type: app_store
