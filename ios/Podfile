@@ -36,6 +36,19 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+
+      # Force-enable privacy manifest inclusion in the built product
+      config.build_settings['GENERATE_INFOPLIST_FILE'] = 'YES'
+    end
+  end
+
+  # Print which pods are missing a privacy manifest (visible in Codemagic build log)
+  installer.pods_project.targets.each do |target|
+    pod_root = installer.sandbox.pod_dir(target.name) rescue nil
+    next unless pod_root
+    manifest_path = File.join(pod_root, 'PrivacyInfo.xcprivacy')
+    unless File.exist?(manifest_path)
+      puts "⚠️  WARNING: #{target.name} has NO PrivacyInfo.xcprivacy manifest"
     end
   end
 end
