@@ -19,7 +19,17 @@ workflows:
           flutter pub get
       - name: Install CocoaPods
         script: |
-          cd ios && pod install
+          cd ios && pod install --repo-update
+      - name: Fix privacy bundle CFBundleExecutable issue
+        script: |
+          cd ios
+          find . -name "*_privacy.bundle" -type d | while read bundle; do
+            plist="$bundle/Info.plist"
+            if [ -f "$plist" ]; then
+              /usr/libexec/PlistBuddy -c "Delete :CFBundleExecutable" "$plist" 2>/dev/null || true
+              echo "Cleaned: $plist"
+            fi
+          done
       - name: Add app-level privacy manifest
         script: |
           cat > ios/Runner/PrivacyInfo.xcprivacy << 'EOF'
