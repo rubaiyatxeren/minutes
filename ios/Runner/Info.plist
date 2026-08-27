@@ -27,6 +27,10 @@
     <key>UIRequiresFullScreen</key>
     <true/>
 
+    <!-- Apple Export Compliance Exemption -->
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+
     <!-- Camera & Microphone Permissions -->
     <key>NSCameraUsageDescription</key>
     <string>Minutes needs camera access for video calls and profile photos.</string>
