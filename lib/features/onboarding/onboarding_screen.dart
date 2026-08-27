@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 8, 12, 0),
                 child: Row(
                   children: [
-                    AppLogo(size: 34, rounded: true),
+                    AppLogo(size: 34, ),
                     const SizedBox(width: 10),
                     Text(
                       t.appName,
