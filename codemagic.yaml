@@ -1,0 +1,21 @@
+workflows:
+  ios-build:
+    name: iOS Release Build
+    instance_type: mac_mini_m1
+    integrations:
+      app_store_connect: App Store Connect Key
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.meet.minutes # Replace with your Bundle ID
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Get Flutter dependencies
+        script: flutter pub get
+      - name: Install CocoaPods
+        script: find . -name "Podfile" -execdir pod install \;
+      - name: Build iOS IPA
+        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
