@@ -20,9 +20,13 @@ workflows:
       - name: Install CocoaPods
         script: |
           cd ios && pod install
+      - name: Clear corrupted SPM cache
+        script: |
+          rm -rf ~/Library/Caches/org.swift.swiftpm
+          rm -rf ios/SourcePackages
       - name: Build iOS IPA
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --export-options-plist /Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
