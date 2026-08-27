@@ -36,30 +36,17 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
-
-      # Force-enable privacy manifest inclusion in the built product
-      config.build_settings['GENERATE_INFOPLIST_FILE'] = 'YES'
     end
   end
 
-  # Fix: resource-only bundles (like flutter_local_notifications_privacy.bundle)
-  # should never carry a CFBundleExecutable / code signing expectation
-  installer.pods_project.targets.each do |target|
-    if target.respond_to?(:product_type) && target.product_type == "com.apple.product-type.bundle"
-      target.build_configurations.each do |config|
+  # THE ACTUAL FIX for error 90535: resource-only bundle targets
+  # (e.g. flutter_local_notifications_privacy.bundle) must not have
+  # code signing applied or an Info.plist with CFBundleExecutable.
+  installer.target_installation_results.pod_target_installation_results.each do |pod_name, target_installation_result|
+    target_installation_result.resource_bundle_targets.each do |resource_bundle_target|
+      resource_bundle_target.build_configurations.each do |config|
         config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
-        config.build_settings['SKIP_INSTALL'] = 'YES'
       end
-    end
-  end
-
-  # Print which pods are missing a privacy manifest (visible in Codemagic build log)
-  installer.pods_project.targets.each do |target|
-    pod_root = installer.sandbox.pod_dir(target.name) rescue nil
-    next unless pod_root
-    manifest_path = File.join(pod_root, 'PrivacyInfo.xcprivacy')
-    unless File.exist?(manifest_path)
-      puts "⚠️  WARNING: #{target.name} has NO PrivacyInfo.xcprivacy manifest"
     end
   end
 end
