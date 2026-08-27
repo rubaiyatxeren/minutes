@@ -75,12 +75,14 @@ workflows:
         script: |
           rm -rf ~/Library/Caches/org.swift.swiftpm
           rm -rf ios/SourcePackages
-      - name: Bump build number
+      - name: Safe manual build increment
         script: |
-          #!/bin/bash
-          set -e
           cd $CM_BUILD_DIR
-          agvtool new-version -all $(($(app-store-connect get-latest-testflight-build-number "$BUNDLE_ID" --live) + 1)) || true
+          # Manually updating the version block to guarantee a clean build number increment
+          current_build=$(grep 'version:' pubspec.yaml | cut -d '+' -f 2)
+          next_build=$((current_build + 1))
+          sed -i '' "s/version: 1.0.0+.*/version: 1.0.0+$next_build/" pubspec.yaml
+          echo "Updated build number to: $next_build"
       - name: Build iOS IPA
         script: |
           flutter build ipa --release --export-options-plist /Users/builder/export_options.plist
